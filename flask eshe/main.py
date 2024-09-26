@@ -57,5 +57,25 @@ def create_user():
     close_connection(connection, cursor)
     return redirect(url_for('index'))
 
+@app.route('/user/create/mob', methods=['POST'])
+def create_user_mob():
+    json = request.json
+    login = json['login']
+    password = json['pass']
+
+    connection, cursor = get_connection()
+    try:
+
+        cursor.execute('''INSERT INTO USERS(login, password)
+        VALUES (%s, %s);''', (login, password))
+
+        connection.commit()
+
+    except Exception:
+        return abort(400, 'Login must be unique')
+    finally:
+        close_connection(connection, cursor)
+    return jsonify(success='ok')
+
 if __name__ == '__main__':
-    app.run()
+    app.run('0.0.0.0')
