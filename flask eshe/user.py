@@ -1,5 +1,6 @@
 class User:
-    def __init__(self, login, name, address):
+    def __init__(self, login, name, img_url):
         self.login = login
         self.name = name
-        self.address = address
+        self.image_url = img_url
+
