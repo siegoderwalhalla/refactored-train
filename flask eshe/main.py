@@ -27,11 +27,11 @@ def get_user(user_id=None):
     connection, cursor = get_connection()
 
     if user_id is None:
-        cursor.execut('''SELECT * FROM USERS''')
+        cursor.execute('''SELECT * FROM USERS''')
         users_data = cursor.fetchall()
         close_connection(connection, cursor)
 
-        return [User(i[0], i[1], i[2]).__dict__ for i in users_data]
+        return [User(i[0], i[1], i[3]).__dict__ for i in users_data]
 
     cursor.execute('''SELECT * FROM USERS WHERE user_order=%s''', [user_id])
 
@@ -63,7 +63,7 @@ def create_user():
 def create_user_mob():
     json = request.json
     login = json['login']
-    password = json['pass']
+    password = json['password']
 
     connection, cursor = get_connection()
     try:
