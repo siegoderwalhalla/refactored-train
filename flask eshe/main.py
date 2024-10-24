@@ -109,7 +109,7 @@ def upload_file():
             return redirect(url_for('download_file', name=filename))
     return render_template('files.html')
 
-@app.route('/uploads/<name>')
+@app.route('/<name>')
 def download_file(name):
     # name += '.png' - для красоты урла
     return send_from_directory(app.config["UPLOAD_FOLDER"], name)
@@ -118,6 +118,6 @@ if __name__ == '__main__':
     app.run('0.0.0.0', debug=True)
 
     #ALTER TABLE users
-    #ADD COLUMN img_url VARCHAR(120) DEFAULT 'БАШУиеавч.png'
+    #ADD COLUMN img_url VARCHAR(120) DEFAULT 'БАШУиеав.png'
 
     #UPDATE users SET img_url = 'анимация 001-01.png' WHERE login LIKE 'root%'
